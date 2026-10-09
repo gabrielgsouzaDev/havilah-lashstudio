@@ -24,7 +24,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   // Reordered according to user priority
   const navItems = [
-    { icon: House, label: 'Início', path: AppRoute.DASHBOARD },
+    { icon: House, label: 'Início', path: AppRoute.HOME },
     { icon: Sparkles, label: 'Modelos & Valores', path: AppRoute.PRICING },
     { icon: Calendar, label: 'Agendar Horário', path: AppRoute.BOOKING },
     { icon: Eye, label: 'Consultoria', path: AppRoute.CONSULTANCY },
@@ -34,7 +34,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   // Mobile Bottom App Bar items (top 5 priority)
   const mobileNavItems = [
-    { icon: House, label: 'Início', path: AppRoute.DASHBOARD },
+    { icon: House, label: 'Início', path: AppRoute.HOME },
     { icon: Sparkles, label: 'Valores', path: AppRoute.PRICING },
     { icon: Calendar, label: 'Agendar', path: AppRoute.BOOKING, isPrimary: true },
     { icon: Eye, label: 'Consultoria', path: AppRoute.CONSULTANCY },
@@ -58,7 +58,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="md:hidden flex items-center justify-between px-4 py-3 bg-havilah-black/95 backdrop-blur-md border-b border-havilah-gold/20 sticky top-0 z-40">
         <div
           className="flex items-center gap-2.5 cursor-pointer"
-          onClick={() => navigate(AppRoute.DASHBOARD)}
+          onClick={() => navigate(AppRoute.HOME)}
         >
           <img
             src={studioLogo}
@@ -92,7 +92,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Logo & Brand Header */}
           <div
             className="mb-8 text-center flex flex-col items-center cursor-pointer"
-            onClick={() => navigate(AppRoute.DASHBOARD)}
+            onClick={() => navigate(AppRoute.HOME)}
           >
             <img
               src={studioLogo}

@@ -10,14 +10,14 @@ export enum ProcedureId {
 }
 
 export enum AppRoute {
-  WELCOME = '/',
-  DASHBOARD = '/dashboard',
+  HOME = '/',
   PRICING = '/valores',
   BOOKING = '/agendamento',
   CONSULTANCY = '/consultoria',
   CARE = '/cuidados',
-  CHAT = '/chat-ai',
   ABOUT_ME = '/sobre-mim',
+  CHAT = '/chat-ai',
+  DASHBOARD = '/dashboard',
 }
 
 export interface Procedure {
