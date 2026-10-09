@@ -1,0 +1,7 @@
+{
+  "name": "Havilah Lash Studio",
+  "description": "Estúdio especializado em extensão de cílios, visagismo e cuidados do olhar na Vila Caiçara, Praia Grande - SP. Procedimentos por Rebecca Havilah.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
