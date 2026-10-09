@@ -9,9 +9,8 @@ export const FAQSection: React.FC = () => {
   const categories = [
     { id: 'todos', label: 'Todas as Dúvidas' },
     { id: 'procedimento', label: 'Procedimento' },
-    { id: 'cuidados', label: 'Cuidados & Durabilidade' },
-    { id: 'estudio', label: 'Estúdio & Local' },
-    { id: 'agendamento', label: 'Agendamento' },
+    { id: 'cuidados', label: 'Cuidados & Rotina' },
+    { id: 'agendamento', label: 'Agendamento & Pagamento' },
   ];
 
   const filtered =

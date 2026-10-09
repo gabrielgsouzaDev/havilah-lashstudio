@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Send, LoaderCircle, X, MessageCircle, Sparkles } from 'lucide-react';
 import { ChatMessage } from '../types';
 import { HavilahAvatar } from './HavilahAvatar';
+import { getAssistantResponse } from '../services/chatAssistant';
 
 export const ChatModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,38 +44,44 @@ export const ChatModal: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
+    let replyText = '';
+
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3500);
+
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: trimmed }),
+        signal: controller.signal,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Erro na API');
+      clearTimeout(timeoutId);
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: 'model',
-          text: data.text,
-          timestamp: new Date(),
-        },
-      ]);
-    } catch (err) {
-      console.error('Erro Chat:', err);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: 'model',
-          text: 'Para informações imediatas ou agendamento de horários, você também pode falar diretamente com a Rebecca pelo WhatsApp (13) 99700-2356.',
-          timestamp: new Date(),
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.text) {
+          replyText = data.text;
+        }
+      }
+    } catch {
+      // In case of static host, timeout or error, fallback seamlessly to client engine
     }
+
+    if (!replyText) {
+      replyText = getAssistantResponse(trimmed);
+    }
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: (Date.now() + 1).toString(),
+        role: 'model',
+        text: replyText,
+        timestamp: new Date(),
+      },
+    ]);
+    setIsLoading(false);
   };
 
   return (

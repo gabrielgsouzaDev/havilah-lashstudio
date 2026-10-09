@@ -332,10 +332,6 @@ export const Booking: React.FC = () => {
             </div>
           ))}
         </div>
-        <p className="text-[11px] text-havilah-champagne/60 italic border-t border-havilah-gold/10 pt-2 flex items-center gap-1.5">
-          <MapPin size={13} className="text-havilah-gold shrink-0" />
-          <span><strong>Chegada ao Estúdio:</strong> Entrada privativa sem placa na fachada no nº 581 da R. Santa Luzia. Toque a campainha ou mande mensagem ao chegar.</span>
-        </p>
       </div>
 
       {/* Submit Button */}

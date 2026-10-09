@@ -1,5 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
+import { getAssistantResponse } from '../src/services/chatAssistant.ts';
 
 dotenv.config();
 
@@ -46,13 +47,13 @@ Orientações de cuidados:
 - Manutenção recomendada a cada 15 a 20 dias para acompanhar o ciclo natural de queda dos fios.
 
 Localização do estúdio:
-R. Santa Luzia, 581 - Vila Caiçara, Praia Grande - SP.
-Atendimento com hora marcada em espaço privativo (sem placa na fachada; ao chegar, tocar a campainha ou avisar no WhatsApp).
+R. Santa Luzia, 581 - Vila Caiçara, Praia Grande - SP, CEP 11706-040.
+Atendimento exclusivo com hora marcada em espaço privativo e confortável.
 WhatsApp: (13) 99700-2356.`;
 
 export async function handleChatMessage(message: string): Promise<string> {
   if (!ai) {
-    return `Olá! Seja bem-vinda ao Havilah Lash Studio. Sou a assistente do estúdio de Rebecca Havilah.\n\nAtendemos com hora marcada na Vila Caiçara, em Praia Grande. Posso tirar suas dúvidas sobre modelos, manutenção e cuidados, ou você pode falar diretamente conosco pelo WhatsApp (13) 99700-2356. Como posso ajudar?`;
+    return getAssistantResponse(message);
   }
 
   try {
@@ -67,11 +68,11 @@ export async function handleChatMessage(message: string): Promise<string> {
 
     return (
       response.text ||
-      'Olá! Seja bem-vinda ao Havilah Lash Studio. Como posso ajudar na escolha do seu procedimento ou com informações sobre o atendimento?'
+      getAssistantResponse(message)
     );
   } catch (error: any) {
     console.error('Error generating chat response:', error);
-    return `Olá! Seja bem-vinda ao Havilah Lash Studio. Para informações sobre agendamento, técnicas ou valores, fale diretamente com a Rebecca pelo WhatsApp (13) 99700-2356.`;
+    return getAssistantResponse(message);
   }
 }
 

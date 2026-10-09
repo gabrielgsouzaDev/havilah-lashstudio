@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Send, LoaderCircle } from 'lucide-react';
 import { ChatMessage } from '../types';
 import { HavilahAvatar } from '../components/HavilahAvatar';
+import { getAssistantResponse } from '../services/chatAssistant';
 
 export const ChatAI: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -40,38 +41,44 @@ export const ChatAI: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
+    let replyText = '';
+
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3500);
+
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: trimmed }),
+        signal: controller.signal,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Erro na API');
+      clearTimeout(timeoutId);
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: 'model',
-          text: data.text,
-          timestamp: new Date(),
-        },
-      ]);
-    } catch (err) {
-      console.error('Erro Chat:', err);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: 'model',
-          text: 'Desculpe, ocorreu um erro ao conectar com a assistente. Se preferir, fale conosco pelo WhatsApp!',
-          timestamp: new Date(),
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.text) {
+          replyText = data.text;
+        }
+      }
+    } catch {
+      // In case of static host, timeout or error, fallback seamlessly to client engine
     }
+
+    if (!replyText) {
+      replyText = getAssistantResponse(trimmed);
+    }
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: (Date.now() + 1).toString(),
+        role: 'model',
+        text: replyText,
+        timestamp: new Date(),
+      },
+    ]);
+    setIsLoading(false);
   };
 
   return (

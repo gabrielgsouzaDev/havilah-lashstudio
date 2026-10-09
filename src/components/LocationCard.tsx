@@ -24,16 +24,6 @@ export const LocationCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Arrival notice without placa */}
-      <div className="bg-havilah-darkGray border border-havilah-gold/20 rounded-xl p-4 md:p-5 text-xs md:text-sm text-havilah-champagne/85 leading-relaxed space-y-1">
-        <p className="font-semibold text-havilah-gold">
-          Acesso e identificação no local:
-        </p>
-        <p>
-          O atendimento é individual em espaço privativo. Como não há placa comercial na fachada, ao chegar no número 581 basta tocar a campainha ou avisar pelo WhatsApp que abriremos o portão para você.
-        </p>
-      </div>
-
       {/* Action buttons */}
       <div className="flex flex-wrap gap-3 pt-1">
         <a
