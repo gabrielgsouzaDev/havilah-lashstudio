@@ -43,8 +43,9 @@ Orientações de cuidados:
 - Evitar produtos oleosos e rímel à prova d'água.
 - Manutenção recomendada a cada 15 a 20 dias para acompanhar o ciclo natural de queda dos fios.
 
-Localização do estúdio:
+Localização e horários do estúdio:
 R. Santa Luzia, 581 - Vila Caiçara, Praia Grande - SP, CEP 11706-040.
+Horário de atendimento: Segunda a Sexta das 09:00 às 18:00, Sábados das 09:00 às 14:00 (Domingos fechado).
 Atendimento exclusivo com hora marcada em espaço privativo e confortável.
 WhatsApp: (13) 99700-2356.`;
 

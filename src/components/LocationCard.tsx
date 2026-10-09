@@ -20,7 +20,7 @@ export const LocationCard: React.FC = () => {
 
         <div className="flex items-center gap-2 text-xs text-havilah-champagne/70 bg-havilah-darkGray px-3.5 py-2 rounded-xl border border-havilah-gold/20 w-fit">
           <Clock size={15} className="text-havilah-gold shrink-0" />
-          <span>Seg a Sex: 09h às 19h • Sáb: 09h às 16h</span>
+          <span>Seg a Sex: 09h às 18h • Sáb: 09h às 14h</span>
         </div>
       </div>
 

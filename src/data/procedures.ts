@@ -14,7 +14,7 @@ export const procedures: Procedure[] = [
     id: ProcedureId.FOX_EYES,
     name: 'Fox Eyes',
     description:
-      'Olhar felino com alongamento estratégico nos cantos externos. Proporciona um efeito lifting suave e moderno que valoriza as linhas do rosto.',
+      'Alongamento estratégico nos cantos externos com transição suave. Proporciona um efeito lifting elegante e moderno que valoriza as linhas do rosto.',
     imagePlaceholder: '/ciliosfox.jpg',
     price: 190,
     maintenancePrice: 100,
@@ -143,8 +143,8 @@ export const studioInfo = {
   },
   googleMapsUrl: 'https://maps.app.goo.gl/HWhdxEb5MvZbbJyF6',
   hours: [
-    { days: 'Segunda a Sexta', hours: '09:00 às 19:00' },
-    { days: 'Sábados', hours: '09:00 às 16:00' },
+    { days: 'Segunda a Sexta', hours: '09:00 às 18:00' },
+    { days: 'Sábados', hours: '09:00 às 14:00' },
     { days: 'Domingos e Feriados', hours: 'Fechado' },
   ],
 };
@@ -219,7 +219,7 @@ export const beforeAfterItems = [
   },
   {
     id: 'ba-fox',
-    title: 'Fox Eyes (Olhar Felino)',
+    title: 'Fox Eyes',
     technique: 'Efeito Lifting nos Cantos',
     description:
       'Alongamento estratégico nas extremidades externas para levantar e esticar o olhar com sensualidade.',

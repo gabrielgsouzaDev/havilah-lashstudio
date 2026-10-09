@@ -28,7 +28,6 @@ export const Booking: React.FC = () => {
   const [selectedModel, setSelectedModel] = useState<Procedure | null>(null);
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
 
-  const timeSlots = ['09:00', '11:00', '14:00', '16:30', '18:00'];
   const availableProcedures = procedures.filter((p) => p.price);
   const paymentMethods = [
     { id: 'pix', label: 'PIX' },
@@ -37,6 +36,20 @@ export const Booking: React.FC = () => {
     { id: 'dinheiro', label: 'Dinheiro' },
   ];
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+  const getTimeSlotsForDate = (date: Date | null): string[] => {
+    if (!date) return [];
+    const dayOfWeek = date.getDay();
+    if (dayOfWeek === 0) return []; // Fechado aos domingos
+    if (dayOfWeek === 6) {
+      // Sábado: 09h às 14h
+      return ['09:00', '10:30', '12:00'];
+    }
+    // Segunda a Sexta: 09h às 18h
+    return ['09:00', '11:00', '14:00', '16:00'];
+  };
+
+  const timeSlots = getTimeSlotsForDate(selectedDate);
 
   const getDaysInMonth = (year: number, month: number) =>
     new Date(year, month + 1, 0).getDate();
@@ -61,6 +74,7 @@ export const Booking: React.FC = () => {
       currentMonth.getMonth(),
       day
     );
+    if (d.getDay() === 0) return; // Domingo fechado
     setSelectedDate(d);
     setSelectedTime(null);
     setSelectedModel(null);
@@ -120,16 +134,21 @@ export const Booking: React.FC = () => {
         today.getMonth() === month &&
         today.getFullYear() === year;
       const isSelected = isSelectedDate(day);
+      const isSunday = new Date(year, month, day).getDay() === 0;
 
       cells.push(
         <button
           key={day}
+          disabled={isSunday}
           onClick={() => handleSelectDay(day)}
-          className={`h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center text-sm transition-all cursor-pointer
+          title={isSunday ? 'Fechado aos domingos' : undefined}
+          className={`h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center text-sm transition-all
             ${
-              isSelected
-                ? 'bg-havilah-gold text-havilah-black font-bold shadow-lg shadow-havilah-gold/20 scale-110'
-                : 'text-havilah-champagne hover:bg-havilah-gold/10'
+              isSunday
+                ? 'opacity-25 cursor-not-allowed text-havilah-champagne/40'
+                : isSelected
+                ? 'bg-havilah-gold text-havilah-black font-bold shadow-lg shadow-havilah-gold/20 scale-110 cursor-pointer'
+                : 'text-havilah-champagne hover:bg-havilah-gold/10 cursor-pointer'
             }
             ${isToday && !isSelected ? 'border border-havilah-gold/30' : ''}
           `}
@@ -156,19 +175,24 @@ export const Booking: React.FC = () => {
         </p>
       </header>
 
-      {/* Studio Location Pill */}
+      {/* Studio Location & Hours Pill */}
       <div className="bg-havilah-darkGray border border-havilah-gold/20 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2 text-havilah-champagne/90">
-          <MapPin size={18} className="text-havilah-gold shrink-0" />
-          <span>
-            <strong>Local de Atendimento:</strong> {studioInfo.address.fullFormatted}
-          </span>
+        <div className="space-y-1">
+          <div className="flex items-center gap-2 text-havilah-champagne/90">
+            <MapPin size={18} className="text-havilah-gold shrink-0" />
+            <span>
+              <strong>Local de Atendimento:</strong> {studioInfo.address.fullFormatted}
+            </span>
+          </div>
+          <p className="text-[11px] text-havilah-champagne/70 pl-6">
+            Atendimento: Seg a Sex das 09h às 18h • Sáb das 09h às 14h
+          </p>
         </div>
         <a
           href={studioInfo.googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-havilah-gold hover:underline flex items-center gap-1 font-semibold shrink-0"
+          className="text-havilah-gold hover:underline flex items-center gap-1 font-semibold shrink-0 self-start sm:self-center"
         >
           Ver no Maps <ExternalLink size={12} />
         </a>

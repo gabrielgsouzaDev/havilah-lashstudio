@@ -41,12 +41,12 @@ export function getAssistantResponse(message: string): string {
         'Você pode ver a foto desse modelo na aba Valores ou agendar seu horário na aba Agendar!'
       );
     }
-    if (/fox|raposa|gatinho/i.test(text)) {
+    if (/fox/i.test(text)) {
       return (
-        'O Fox Eyes cria um efeito delineado com elevação nos cantos externos dos olhos.\n\n' +
+        'O Fox Eyes cria um efeito de alongamento e elevação nos cantos externos dos olhos.\n\n' +
         '• Aplicação: R$ 190\n' +
         '• Manutenção: R$ 100\n\n' +
-        'É uma das técnicas mais pedidas para quem busca um olhar marcante e levantado.'
+        'É uma das técnicas mais pedidas para quem busca um olhar marcante e elegante.'
       );
     }
     if (/princesa/i.test(text)) {
@@ -68,7 +68,7 @@ export function getAssistantResponse(message: string): string {
     return (
       'Aqui está o resumo dos valores dos nossos procedimentos:\n\n' +
       '• Volume Havilah (Assinatura): Aplicação R$ 170 | Manutenção R$ 100\n' +
-      '• Fox Eyes (Efeito Lifting): Aplicação R$ 190 | Manutenção R$ 100\n' +
+      '• Fox Eyes: Aplicação R$ 190 | Manutenção R$ 100\n' +
       '• Efeito Princesa: Aplicação R$ 150 | Manutenção R$ 90\n' +
       '• Volume Premium: Aplicação R$ 170 | Manutenção R$ 90\n' +
       '• Volume Divino: Aplicação R$ 140 | Manutenção R$ 90\n' +
@@ -94,9 +94,9 @@ export function getAssistantResponse(message: string): string {
     );
   }
 
-  if (/fox eyes|fox|olhar felino|delineado/i.test(text)) {
+  if (/fox eyes|fox/i.test(text)) {
     return (
-      'O Fox Eyes é projetado para criar um efeito de olhar alongado e elevado. Trabalhamos com fios gradualmente maiores em direção ao canto externo, criando um efeito lifting natural e sedutor.\n\n' +
+      'O Fox Eyes é projetado para criar um efeito de olhar alongado e elevado. Trabalhamos com fios gradualmente maiores em direção ao canto externo, criando um efeito sofisticado e marcante.\n\n' +
       '• Aplicação: R$ 190\n' +
       '• Manutenção: R$ 100'
     );
@@ -226,7 +226,7 @@ export function getAssistantResponse(message: string): string {
       'Para agendar é muito rápido e prático:\n\n' +
       '1. Você pode acessar a aba "Agendar" aqui no menu do site, selecionar o dia, horário disponível e o procedimento desejado;\n' +
       '2. Ou chamar diretamente a Rebecca no WhatsApp pelo número (13) 99700-2356.\n\n' +
-      'Nosso atendimento é de Segunda a Sexta das 09h às 19h e Sábados das 09h às 16h, com hora previamente marcada para garantir exclusividade e pontualidade!'
+      'Nosso atendimento é de Segunda a Sexta das 09h às 18h e Sábados das 09h às 14h, com hora previamente marcada para garantir exclusividade e pontualidade!'
     );
   }
 
@@ -238,8 +238,8 @@ export function getAssistantResponse(message: string): string {
   ) {
     return (
       'Nosso horário de atendimento é:\n\n' +
-      '• Segunda a Sexta: das 09:00 às 19:00\n' +
-      '• Sábados: das 09:00 às 16:00\n' +
+      '• Segunda a Sexta: das 09:00 às 18:00\n' +
+      '• Sábados: das 09:00 às 14:00\n' +
       '• Domingos e Feriados: Fechado\n\n' +
       'Todos os atendimentos são realizados com hora previamente agendada.'
     );
